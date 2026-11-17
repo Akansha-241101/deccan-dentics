@@ -1,0 +1,200 @@
+"use client";
+
+import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { AppointmentBasicsFields } from "@/components/admin/appointments/AppointmentBasicsFields";
+import { AppointmentReviewStep } from "@/components/admin/appointments/AppointmentReviewStep";
+import { FormStepper } from "@/components/admin/forms/FormStepper";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import type {
+  Appointment,
+  AppointmentInput,
+} from "@/types/admin/appointment";
+import type { Patient } from "@/types/admin/patient";
+import { useAdminStore } from "@/stores/useAdminStore";
+import { appointmentToInput } from "@/utils/admin/appointmentForm";
+import { adminSlotError } from "@/features/appointment/utils/appointmentSlots";
+import { hasAppointmentBasics, missingBasics } from "@/utils/admin/appointmentReady";
+
+const STEPS = [
+  { label: "Booking", title: "Who and when", hint: "Choose the patient, then the date, time and service." },
+  { label: "Review", title: "Review the appointment", hint: "Check the details, then create the appointment." },
+] as const;
+const LAST = STEPS.length - 1;
+
+type AppointmentFormDialogProps = {
+  open: boolean;
+  appointment?: Appointment | null;
+  defaults?: Partial<AppointmentInput>;
+  patients: Patient[];
+  onClose: () => void;
+  /** Resolves true once saved; the dialog stays open otherwise. */
+  onSave: (input: AppointmentInput) => Promise<boolean>;
+};
+
+export function AppointmentFormDialog({
+  open,
+  appointment,
+  defaults,
+  patients,
+  onClose,
+  onSave,
+}: AppointmentFormDialogProps) {
+  return (
+    <Dialog open={open} onOpenChange={(next) => (!next ? onClose() : null)}>
+      <DialogContent className="sm:max-w-2xl" showCloseButton>
+        {open ? (
+          <AppointmentFormBody
+            key={appointment?.id ?? `new-${defaults?.date}-${defaults?.time}`}
+            appointment={appointment}
+            defaults={defaults}
+            patients={patients}
+            onClose={onClose}
+            onSave={onSave}
+          />
+        ) : null}
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+function AppointmentFormBody({
+  appointment,
+  defaults,
+  patients,
+  onClose,
+  onSave,
+}: Omit<AppointmentFormDialogProps, "open">) {
+  const [step, setStep] = useState(0);
+  const [saving, setSaving] = useState(false);
+  const [value, setValue] = useState(() => appointmentToInput(appointment, patients, defaults));
+
+  const days = useAdminStore((s) => s.days);
+  const appointments = useAdminStore((s) => s.appointments);
+  const slotsFor = useAdminStore((s) => s.slotsFor);
+  const settings = useAdminStore((s) => s.settings);
+
+  const patient = patients.find((item) => item.id === value.patientId);
+  const slotError = value.date && value.time ? adminSlotError(value, days, appointments, settings, appointment) : null;
+  // Editing an appointment: the steps above are free tabs, and Save needs only the booking details.
+  // Creating one walks through both steps.
+  const isEdit = Boolean(appointment);
+  const basicsDone = hasAppointmentBasics(value) && !slotError;
+  const canSave = basicsDone;
+  // An edit may keep its saved time even if the schedule has since changed.
+  const keepsSavedTime = (date: string, time: string) => appointment?.date === date && appointment.time === time;
+  const timeOptions = slotsFor(value.date, appointment?.id);
+  const visibleTimes = value.time && keepsSavedTime(value.date, value.time) && !timeOptions.includes(value.time) ? [...timeOptions, value.time].sort() : timeOptions;
+  const stepDone = [basicsDone, canSave];
+  const canGoNext = basicsDone;
+
+  // A step opens once the booking step is complete.
+  const canOpen = (index: number) => isEdit || index === 0 || basicsDone;
+
+  // Say what is missing instead of leaving "Continue" greyed out without a reason.
+  const missing = missingBasics(value);
+  const hint = basicsDone ? null : (slotError ?? `Still needed: ${missing.join(", ")}`);
+
+  function selectPatient(patientId: string) {
+    setValue({ ...value, patientId });
+  }
+
+  // A new day has its own working hours, so a time that no longer fits is cleared.
+  function changeDate(date: string) {
+    const times = slotsFor(date, appointment?.id);
+    const stillValid = times.includes(value.time) || keepsSavedTime(date, value.time);
+    setValue({ ...value, date, time: stillValid ? value.time : "" });
+  }
+
+  // Waits for the database: the dialog closes only when the appointment is saved.
+  async function save() {
+    if (!canSave || saving) return;
+    setSaving(true);
+    const saved = await onSave(value);
+    setSaving(false);
+    if (saved) onClose();
+  }
+
+  return (
+    <form
+      className="grid gap-4"
+      onSubmit={(event) => {
+        event.preventDefault();
+        // Creating: Enter moves forward until the last step, where it saves. Editing: Enter saves.
+        if (!isEdit && step < LAST) {
+          if (canGoNext) setStep(step + 1);
+          return;
+        }
+        save();
+      }}
+    >
+      <DialogHeader className="sticky top-0 z-10 -mx-4 -mt-4 gap-4 border-b bg-popover px-4 pt-4 pb-4">
+        <div>
+          <DialogTitle className="font-heading text-xl font-bold">
+            {isEdit ? "Edit appointment" : "New appointment"}
+          </DialogTitle>
+          <p className="m-0 mt-1 hidden text-sm text-muted-foreground sm:block">
+            Step {step + 1} of {STEPS.length}
+          </p>
+        </div>
+        <FormStepper
+          steps={STEPS.map((item, index) => ({ label: item.label, done: stepDone[index] }))}
+          current={step}
+          canOpen={canOpen}
+          onOpen={setStep}
+        />
+      </DialogHeader>
+
+      <div>
+        <h3 className="m-0 font-heading text-base font-bold text-foreground">{STEPS[step].title}</h3>
+        <p className="m-0 mt-0.5 text-sm text-muted-foreground">{STEPS[step].hint}</p>
+      </div>
+
+      {step === 0 ? (
+        <AppointmentBasicsFields value={value} patients={patients} onChange={setValue} onPatientChange={selectPatient} onDateChange={changeDate} timeOptions={visibleTimes} slotError={slotError} />
+      ) : null}
+      {step === 1 ? <AppointmentReviewStep value={value} patient={patient} /> : null}
+
+      <DialogFooter className="flex-row flex-wrap items-center justify-between gap-x-3 gap-y-2">
+        {/* Phones: hint on its own line, then Back on the left and actions on the right. */}
+        {hint ? (
+          <p aria-live="polite" className="order-1 m-0 basis-full text-xs text-muted-foreground sm:order-2 sm:basis-auto sm:flex-1">
+            {hint}
+          </p>
+        ) : (
+          <span className="hidden sm:order-2 sm:block sm:flex-1" />
+        )}
+        <div className="order-2 sm:order-1">
+          {!isEdit && step > 0 ? (
+            <Button type="button" variant="ghost" onClick={() => setStep(step - 1)}>
+              <ChevronLeft className="size-4" />
+              Back
+            </Button>
+          ) : null}
+        </div>
+        <div className="order-3 flex items-center gap-2">
+          <Button type="button" variant="outline" onClick={onClose}>
+            Cancel
+          </Button>
+          {!isEdit && step < LAST ? (
+            <Button type="button" disabled={!canGoNext} onClick={() => setStep(step + 1)}>
+              Continue
+              <ChevronRight className="size-4" />
+            </Button>
+          ) : (
+            <Button type="submit" disabled={!canSave || saving}>
+              {saving ? "Saving…" : isEdit ? "Save changes" : "Create appointment"}
+            </Button>
+          )}
+        </div>
+      </DialogFooter>
+    </form>
+  );
+}

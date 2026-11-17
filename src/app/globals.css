@@ -563,3 +563,124 @@
     0 14px 28px color-mix(in srgb, var(--foreground) 14%, transparent)
   );
 }
+/*
+ * Admin panel and booking tokens.
+ * The admin and booking components (ported from the shared admin implementation) name a few
+ * extra colours: ink, text, beige, alert, slot … Each one points at a Deccan Dentics token above,
+ * so the admin keeps the forest-green identity in light and dark mode. Change colours in :root /
+ * .dark above, not here.
+ */
+:root {
+  --dd-primary-dark: #1d5c3d;
+  --dd-ink: var(--foreground);
+  --dd-text: #3f5547;
+  --dd-beige-light: #fbfdfb;
+  --dd-beige: var(--secondary);
+  --dd-beige-deep: #d3e6d7;
+  --dd-accent-deep: #28583d;
+  --dd-accent-green: #3fa66b;
+  --dd-pill: var(--muted);
+  --dd-alert-bg: #fdecec;
+  --dd-alert-text: #a12a2a;
+  --dd-slot-icon: var(--secondary);
+  --dd-slot-weekday: var(--muted-foreground);
+  --dd-slot-muted: #b9c8bc;
+  --dd-slot-line: var(--border);
+}
+
+.dark {
+  --dd-primary-dark: #2f7a52;
+  --dd-text: #c3d4c7;
+  --dd-beige-light: #16211a;
+  --dd-beige-deep: #2b4232;
+  --dd-accent-deep: #9fd8b1;
+  --dd-accent-green: #65bd86;
+  --dd-alert-bg: #3a1717;
+  --dd-alert-text: #fca5a5;
+  --dd-slot-muted: #4b5f50;
+}
+
+@theme inline {
+  --color-primary-dark: var(--dd-primary-dark);
+  --color-ink: var(--dd-ink);
+  --color-text: var(--dd-text);
+  --color-beige-light: var(--dd-beige-light);
+  --color-beige: var(--dd-beige);
+  --color-beige-deep: var(--dd-beige-deep);
+  --color-accent-deep: var(--dd-accent-deep);
+  --color-accent-green: var(--dd-accent-green);
+  --color-pill: var(--dd-pill);
+  --color-alert-bg: var(--dd-alert-bg);
+  --color-alert-text: var(--dd-alert-text);
+  --color-slot-icon: var(--dd-slot-icon);
+  --color-slot-weekday: var(--dd-slot-weekday);
+  --color-slot-muted: var(--dd-slot-muted);
+  --color-slot-line: var(--dd-slot-line);
+}
+
+/* The handwritten line above a heading, as on the website's sections. */
+@utility type-eyebrow {
+  font-family: var(--font-script);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1;
+  color: var(--primary);
+  @media (width >= 40rem) {
+    font-size: 1.875rem;
+  }
+}
+
+/* Soft mint elevated button for actions on the green bands (admin calendar, cards). */
+@utility btn-accent {
+  color: var(--accent-foreground);
+  background-image:
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--accent) 70%, white),
+      color-mix(in srgb, var(--accent) 94%, black)
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--accent) 55%, white),
+      color-mix(in srgb, var(--accent) 65%, black)
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.12),
+    0 3px 8px -2px rgba(0, 0, 0, 0.14);
+  &:active {
+    box-shadow:
+      inset 0 2px 4px rgba(0, 0, 0, 0.18),
+      0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Admin base type (the admin-shell class is on every admin screen). */
+@layer base {
+  :root:has(.admin-shell) :where(h1, h2, h3, h4, h5, h6) {
+    margin: 0;
+    color: inherit;
+    font-weight: inherit;
+  }
+  :root:has(.admin-shell) :where(p) {
+    margin: 0;
+  }
+}
+
+/* Anything you can press or pick shows the hand cursor (Tailwind 4 leaves buttons with the arrow). */
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [role="radio"],
+  [role="checkbox"],
+  [role="tab"],
+  [role="switch"],
+  [role="combobox"],
+  [role="option"],
+  summary {
+    cursor: pointer;
+  }
+}

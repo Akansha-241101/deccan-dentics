@@ -1,28 +1,21 @@
 # Security — Deccan Dentics
 
-This version is a public website. It does not authenticate users. The sensitive part is the appointment request, which can contain a name, phone number, and a note about a visit.
+The public website does not authenticate visitors; the admin does (below). The sensitive part is the appointment request, which can contain a name, phone number, and a note about a visit.
 
 ## 1. Authentication and authorization
 
-The marketing site has no login. `/admin` uses a **temporary client password gate** only:
+The marketing site has no login. `/admin` uses **Neon Auth** (email and password, session cookie signed with `NEON_AUTH_COOKIE_SECRET`):
 
-- Password is checked in the browser and unlock is stored in `sessionStorage`.
-- The dialog cannot be dismissed without a correct password (no close icon, outside click, or Escape).
-- This is **not** access control for an API or database. Anyone can read the client bundle and bypass it.
-
-Before any real patient data:
-
-- Authenticate on the server.
-- Authorize on a stable user id and role, not a shared password in the client.
-- Keep session cookies on the provider. Do not invent a token in `localStorage` / `sessionStorage` as the sole gate.
+- Only emails listed in `ADMIN_EMAILS` may sign up, sign in or open the admin.
+- `src/proxy.ts` sends visitors without a session to `/admin/login`; the admin layout checks the session and the admin email again on the server.
+- Every admin server action calls `assertAdmin()` before touching the database. Bulk actions accept only well-formed ids.
+- Password reset sends a one-time Neon Auth link, and only to admin emails; the form answers the same for every email.
 
 Hidden buttons are not access control.
 
 ## 2. Secrets
 
-No environment variables are required to run the app today.
-
-When appointment delivery is added:
+The app needs the server-only variables in `.env.example` (Neon, Neon Auth, SMTP). Real values live only in `.env.local`, which is git-ignored.
 
 - Put provider keys in server-only variables. In Next.js that means they must not use the `NEXT_PUBLIC_` prefix.
 - Read them in a route handler or server module, never in a client component.

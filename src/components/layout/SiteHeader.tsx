@@ -7,6 +7,7 @@ import { CalendarDays, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { NAV_LINKS } from "@/constants/nav";
+import { ROUTES } from "@/constants/routes";
 import { cn } from "cn";
 
 export function SiteHeader() {
@@ -51,7 +52,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <Link href="/contact" className="hidden sm:inline-flex">
+          <Link href={ROUTES.appointment} className="hidden sm:inline-flex">
             <Button size="lg" className="gap-2 px-4 md:px-5">
               <CalendarDays className="size-4" />
               Book Appointment
@@ -83,7 +84,7 @@ export function SiteHeader() {
                 {link.label}
               </Link>
             ))}
-            <Link href="/contact" onClick={() => setOpen(false)}>
+            <Link href={ROUTES.appointment} onClick={() => setOpen(false)}>
               <Button size="lg" className="mt-2 w-full gap-2">
                 <CalendarDays className="size-4" />
                 Book Appointment
