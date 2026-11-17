@@ -1,0 +1,28 @@
+import { DashboardAvatar } from "@/components/admin/dashboard/DashboardAvatar";
+import type { Patient } from "@/types/admin/patient";
+
+// Who the appointment is for, shown on the review step.
+export function AppointmentPatientSummary({ patient }: { patient: Patient | undefined }) {
+  if (!patient) {
+    return (
+      <p className="rounded-xl bg-beige px-3.5 py-3 text-sm text-muted-foreground">
+        Go back and choose a patient first.
+      </p>
+    );
+  }
+  return (
+    <div className="flex items-center gap-3 rounded-xl border border-border bg-white px-3.5 py-3">
+      <DashboardAvatar name={patient.name} className="size-10" />
+      <div className="min-w-0">
+        <p className="m-0 truncate text-sm font-semibold text-foreground">
+          {patient.name}
+        </p>
+        <p className="m-0 truncate text-xs text-muted-foreground">
+          {[patient.gender, patient.age ? `${patient.age} years` : "", patient.phone]
+            .filter(Boolean)
+            .join(" · ")}
+        </p>
+      </div>
+    </div>
+  );
+}

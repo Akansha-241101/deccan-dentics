@@ -11,6 +11,7 @@ import { HeroMotion } from "@/components/motion/FadeIn";
 import { FloatingTools } from "@/components/motion/FloatingTools";
 import { SECTION_TOOLS } from "@/data/section-tools";
 import BrushMark from "./BrushMark";
+import { ROUTES } from "@/constants/routes";
 
 export function HeroSection() {
   return (
@@ -45,7 +46,7 @@ export function HeroSection() {
 
             <HeroMotion delay={0.45}>
               <div className="mt-8 flex flex-wrap items-center gap-3">
-                <Link href="/contact">
+                <Link href={ROUTES.appointment}>
                   <Button size="xl">
                     <CalendarDays />
                     Book Appointment

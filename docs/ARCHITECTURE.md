@@ -1,8 +1,8 @@
 # Architecture — Deccan Dentics
 
-Next.js App Router marketing site plus a client-side `/admin` operations dashboard. Most marketing pages are server-rendered. Client islands handle theme, menus, carousels, accordions, service tabs, the enquiry form, motion, and the admin shell.
+Next.js App Router marketing site, a website booking flow (`/book`), and an `/admin` operations dashboard backed by Neon Postgres. Most marketing pages are server-rendered. Client islands handle theme, menus, carousels, accordions, service tabs, the enquiry form, motion, and the admin shell.
 
-No backend database yet. Admin data lives in Zustand stores seeded in the browser. Admin access is a client password gate in `sessionStorage` — not real server auth.
+Data lives in Neon Postgres (`db/migrations/001_initial.sql`). Admin sign-in uses Neon Auth; the admin layout loads data on the server and fills a Zustand store that saves each change through server actions. Booking emails go out over SMTP (Nodemailer). See `docs/database.md` for setup.
 
 ## 1. Stack
 
@@ -29,7 +29,7 @@ Browser
   └─ Next.js
        ├─ Server: layout, pages, most section shells, footer
        ├─ Client: header, theme, services tabs, Embla, contact form, motion, admin
-       └─ API routes: none yet
+       └─ API routes: /api/slots, /api/appointments, /api/auth/[...path] (Neon Auth)
 ```
 
 Clinic facts live in `src/data/`. Nav links live in `src/constants/nav.ts`. Admin seed/constants live under `src/constants/{patients,appointments,schedule,todos,dashboard}/`.
@@ -51,7 +51,7 @@ src/components/
   layout/                    SiteHeader, SiteFooter, PageShell, theme helpers
   motion/                    FadeIn, HeroMotion
   ui/                        shadcn primitives only
-src/stores/                  Zustand (`useClinicStore` for admin entities)
+src/stores/                  Zustand (`useAdminStore`, filled from Neon by the admin layout)
 src/hooks/                   Shared hooks (incl. use-admin-auth)
 src/constants/               Shared + per-page admin seeds (patients, appointments, …)
 src/types/                   Shared types (incl. admin + todo models)
@@ -88,10 +88,13 @@ public/images/
 | `/reviews` | Reviews only |
 | `/faq` | FAQ only |
 | `/contact` | Branches + Contact |
+| `/book` | Website booking form (service from Neon, date/time picker) |
+| `/appointment-confirmed` | Booking summary after a website booking |
+| `/admin/login`, `/admin/signup`, `/admin/forgot-password`, `/admin/reset-password` | Neon Auth screens |
 | `/admin` | Redirects to `/admin/dashboard` |
 | `/admin/dashboard` | Dashboard (stats + shortcuts) |
 | `/admin/schedule` | Working days and opening hours |
-| `/admin/patients` | Patient CRUD via `useClinicStore` |
+| `/admin/patients` | Patient records (search, filters, bulk actions) |
 | `/admin/appointments` | Appointments linked by `patientId` |
 | `/admin/calendar` | Month / week / day appointment calendar |
 
@@ -138,4 +141,4 @@ Stores mirror future tables. Deleting a patient also removes their appointments 
 - No runtime WordPress fetch.
 - Enquiry form must not claim success until a real delivery API exists.
 - Admin password is a temporary client gate only; replace with server auth before any real patient data.
-- Do not treat `sessionStorage` admin unlock as authorization for a future API.
+- Every admin server action checks the Neon Auth session and `ADMIN_EMAILS` first.

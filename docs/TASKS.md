@@ -57,7 +57,7 @@ Mark an item done only after it is in the repo and checked in the browser or by 
 - [x] Appointments CRUD linked by `patientId`.
 - [x] Appointments Calendar (`/admin/calendar`) Month/Week/Day + day details.
 - [x] DB-friendly models in `types/admin.ts`; seed in `data/admin-seed.ts`.
-- [ ] Replace client password gate with real server auth before production patient data.
+- [x] Replace client password gate with real server auth (Neon Auth) before production patient data.
 - [ ] Persist admin stores to a backend / database.
 
 ## 6. Quality
