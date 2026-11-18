@@ -5,7 +5,6 @@ export const CLINIC = {
   phoneHref: "tel:+917995686661",
   email: "drsadiqali2000@gmail.com",
   emailHref: "mailto:drsadiqali2000@gmail.com",
-  website: "https://dddental.in",
   hours: {
     weekdays: "Mon–Sat 09:00 AM – 08:00 PM",
     sunday: "Sun 02:00 PM – 06:00 PM",

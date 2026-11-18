@@ -4,9 +4,9 @@ Last updated 30 Oct 2026 (admin dashboard added). Read this before changing bran
 
 ## 1. What this is
 
-A redesign of the Deccan Dentics clinic site at [https://dddental.in/](https://dddental.in/). The repository is a Next.js app called `deccan-dentics-dental-clinic`. The live site is still WordPress. This app does not call that WordPress API.
+A resume / portfolio product under the **Deccan Dentics** brand: Next.js app `deccan-dentics-dental-clinic`. Brand name only — not a live clinic website.
 
-The product is a public brochure plus an appointment request, plus a temporary staff `/admin` dashboard for schedule, patients, and appointments. The admin area is not a patient portal and is not production-grade auth.
+The product is a public brochure plus appointment booking, plus a staff `/admin` dashboard for schedule, patients, and appointments. The admin area is a demo with a shared recruiter login, not production-grade multi-tenant auth.
 
 ## 2. Brand decisions already made
 
@@ -21,24 +21,22 @@ The product is a public brochure plus an appointment request, plus a temporary s
 
 The old homepage line "Don't Just Smile, Shine with Confidence!" is legacy. Do not put it in the UI unless the clinic asks.
 
-## 3. Facts checked on the live site
+## 3. Portfolio brand facts
 
-Checked 30 Oct 2026.
+Recorded for this demo (not tied to a live clinic domain):
 
-- Phone on the contact page: `079956 86661`.
-- Email on the contact page: `drsadiqali2000@gmail.com`. This is a public inbox, not an app secret.
-- Hours on the contact page: Monday–Saturday 09:00–20:00, Sunday 14:00–18:00.
-- Contact page branches: Kondapur, Manikonda, Rajendranagar (listed beside Videnta), Toli Chowki. Addresses are in the manifest.
-- Homepage proof: 10+ years, 25k+ patients, 5 branches, family dentistry.
-- Service pages that exist today are listed in `brand-manifest.json`.
+- Phone: `079956 86661`.
+- Email: `drsadiqali2000@gmail.com`. Public contact detail for the demo, not an app secret.
+- Hours: Monday–Saturday 09:00–20:00, Sunday 14:00–18:00.
+- Branches: Kondapur, Manikonda, Rajendranagar (listed beside Videnta), Toli Chowki. Addresses are in the manifest.
+- Proof stats in copy: 10+ years, 25k+ patients, family dentistry.
+- Services are listed in `brand-manifest.json`.
 
-## 4. Conflicts to resolve before launch
+## 4. Conflicts to keep consistent in the demo
 
-- The homepage says 5 branches and has also mentioned Malakpet, Abids, and Aramghar. The contact page shows four. Do not invent the missing branch.
-- The hero badge currently says "1000+ Happy Smiles" because the design board did. The live site says 25k+. Ask the clinic which number is true.
-- Some snippets show different Sunday hours for Toli Chowki. Do not print a second schedule until the clinic confirms it.
-- The design board shows a portrait labelled as a founder. That name is not a verified staff fact from `dddental.in`. Do not publish it.
-- Third-party directories list clinicians. Those lists are not approved bios.
+- Some copy mentions 5 branches and Malakpet; the branch list shows four. Prefer the four in the manifest.
+- Hero badge figures must match the stats used elsewhere in the UI.
+- Do not invent doctor names or clinician bios for the portfolio.
 
 ## 5. Technical decisions
 
@@ -67,7 +65,7 @@ Checked 30 Oct 2026.
 
 ## 7. Constraints
 
-- Clinic copy must be traceable to the live site or to a confirmation recorded here.
+- Clinic copy must match `brand-manifest.json` or a confirmation recorded here. Do not reference a real clinic domain.
 - No payments, accounts, OTP, or medical-history fields in this version.
 - Source files we write stay at or under 120 lines. `src/app/globals.css` is the token file and may be longer. See `RULES.md`.
 - `select.tsx` from shadcn is already over 120 lines. Split it before adding behavior, rather than letting it grow.

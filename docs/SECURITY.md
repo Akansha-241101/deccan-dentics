@@ -20,7 +20,7 @@ The app needs the server-only variables in `.env.example` (Neon, Neon Auth, SMTP
 - Put provider keys in server-only variables. In Next.js that means they must not use the `NEXT_PUBLIC_` prefix.
 - Read them in a route handler or server module, never in a client component.
 - Do not commit `.env` files. Commit `.env.example` with empty names only.
-- The clinic phone and `drsadiqali2000@gmail.com` are already public on [the contact page](https://dddental.in/contact-us/). Documenting them is fine. Using that inbox as an API credential is not.
+- The demo clinic phone and `drsadiqali2000@gmail.com` are public contact details in the portfolio UI. Documenting them is fine. Using that inbox as an API credential is not.
 
 ## 3. Data protection
 

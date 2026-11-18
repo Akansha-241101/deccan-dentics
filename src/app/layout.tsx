@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import { Caveat, Libre_Baskerville, Merriweather } from "next/font/google";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
+import { env } from "@/config/env";
 import { CLINIC } from "@/data/clinic";
 import "./globals.css";
+
+const siteUrl = env.siteUrl() || "http://localhost:3000";
 
 const libreBaskerville = Libre_Baskerville({
   variable: "--font-libre-baskerville",
@@ -24,7 +27,7 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(CLINIC.website),
+  metadataBase: new URL(siteUrl),
   title: {
     default: `${CLINIC.name} | Dental Clinic`,
     template: `%s | ${CLINIC.name}`,
@@ -42,7 +45,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: CLINIC.name,
     description: CLINIC.tagline,
-    url: CLINIC.website,
+    url: siteUrl,
     siteName: CLINIC.name,
     locale: "en_IN",
     type: "website",

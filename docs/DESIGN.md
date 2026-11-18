@@ -98,7 +98,7 @@ Native `<select>` is not used. Links that look like buttons use `Button` as a ch
 1. Header, sticky in feel, with a translucent background.
 2. Hero: eyebrow, display title with one primary-colored phrase, short paragraph, two buttons, four feature chips, portrait with a trust pill.
 3. Services: eyebrow, title, tabbed treatments with photo + points.
-4. Why choose us: tooth art + numbered differentiators (from live site).
+4. Why choose us: tooth art + numbered differentiators (from brand facts).
 5. About: short clinic story and stats—no unverified founder names.
 6. Reviews: Embla cards, stars in `--chart-4`, quote, name.
 7. Branches: selectable Hyderabad locations with address + directions.

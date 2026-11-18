@@ -88,7 +88,7 @@ ${signOff ? SIGN_OFF : ""}
 <span style="color:${C.muted};">&nbsp;·&nbsp;</span><a href="${BRAND.emailHref}" style="color:${C.primary};font-weight:700;text-decoration:none;">${BRAND.email}</a></p>
 </td></tr></table></td></tr>
 <tr><td class="dd-legal" align="center" style="padding:20px 24px 0;font-family:${BODY};font-size:12px;line-height:1.7;color:${C.muted};">
-${escapeHtml(BRAND.tagline)}<br>&copy; ${year} ${BRAND.name} · <a href="${BRAND.url}" style="color:${C.muted};">${BRAND.url.replace(/^https?:\/\//, "")}</a>
+${escapeHtml(BRAND.tagline)}<br>&copy; ${year} ${BRAND.name} · Portfolio demo
 </td></tr></table></td></tr></table></body></html>`;
 }
 

@@ -136,7 +136,7 @@ Organize under `src/` by responsibility. Feature UI is grouped by section:
 - Do not add payments, carts, or online checkout.
 - Do not add a database package until the choice is written into `MEMORY.md`.
 - Authorize any future staff tool on the server. Never gate access with a hidden button alone.
-- Never commit real credentials. The public phone and email may be documented because they are already on `dddental.in`.
+- Never commit real secrets or private credentials. Public demo contact details and the shared portfolio admin login may be documented for recruiters.
 - Never claim a branch, statistic, price, or doctor is real unless `brand-manifest.json` or `MEMORY.md` confirms it.
 - Understand the impact before making destructive changes.
 - Never claim a feature works unless it has been implemented and verified.

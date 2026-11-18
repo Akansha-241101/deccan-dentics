@@ -124,7 +124,7 @@ Theme is owned by `layout/ThemeProvider` (`next-themes`, `attribute="class"`, `d
 
 ## 7. Content source
 
-Facts from [dddental.in](https://dddental.in/): phone, email, Manikonda primary branch, Hyderabad locations, hours, services, clinic narrative. Reviews in `reviews.js` are placeholders until the clinic supplies approved quotes.
+Portfolio brand facts (Deccan Dentics): phone, email, Manikonda primary branch, Hyderabad locations, hours, services, clinic narrative. Reviews in `reviews.js` are placeholders for the demo.
 
 ## 8. Admin data models
 
@@ -138,7 +138,7 @@ Stores mirror future tables. Deleting a patient also removes their appointments 
 
 ## 9. Boundaries
 
-- No runtime WordPress fetch.
-- Enquiry form must not claim success until a real delivery API exists.
-- Admin password is a temporary client gate only; replace with server auth before any real patient data.
+- No external clinic CMS or third-party website fetch.
+- Do not present this app as a live clinic website; keep copy framed as a portfolio demo.
+- Website booking must not claim success until the appointment is saved.
 - Every admin server action checks the Neon Auth session and `ADMIN_EMAILS` first.

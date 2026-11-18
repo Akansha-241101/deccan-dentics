@@ -8,8 +8,8 @@
   "region": "Telangana",
   "country": "India",
   "websites": {
-    "live": "https://dddental.in/",
-    "contact": "https://dddental.in/contact-us/"
+    "portfolio": "Resume / portfolio project under the Deccan Dentics brand",
+    "note": "Brand facts for the demo UI only — not a live clinic website"
   },
   "positioning": {
     "tagline": "Healthy smiles. Happier lives.",
@@ -30,7 +30,7 @@
     "dont": [
       "Use baby talk, cartoons, or fear headlines.",
       "Invent doctor names, prices, guarantees, or reviews.",
-      "Publish a branch or statistic until it is confirmed against the live site."
+      "Publish a branch or statistic until it is confirmed as portfolio brand facts."
     ]
   },
   "logo": {
@@ -154,7 +154,7 @@
     "phoneTel": "+917995686661",
     "email": "drsadiqali2000@gmail.com",
     "hours": {
-      "source": "https://dddental.in/contact-us/",
+      "source": "Portfolio brand facts",
       "mondayToSaturday": "09:00–20:00",
       "sunday": "14:00–18:00",
       "note": "The homepage has also shown different Sunday hours for Toli Chowki. Confirm per branch before launch."
@@ -165,42 +165,42 @@
       "id": "kondapur",
       "name": "Kondapur",
       "address": "Flat No. 304, 4th floor, Ace Monte Carlo apartments, junction, beside TCS, Land Mark Residency, Kondapur, Kothaguda, Hyderabad, Telangana 500084",
-      "confirmedOn": "https://dddental.in/contact-us/"
+      "confirmedOn": "Portfolio brand facts"
     },
     {
       "id": "manikonda",
       "name": "Manikonda",
       "address": "Opposite Hallmark Tranquil, beside AMVI Hospital building, Alkapur Township, Puppalaguda, Manikonda, Hyderabad, Telangana 500089",
-      "confirmedOn": "https://dddental.in/contact-us/"
+      "confirmedOn": "Portfolio brand facts"
     },
     {
       "id": "rajendranagar",
       "name": "Rajendranagar",
       "address": "Near pillar no. 179, Videnta Dental Clinic, Naidu Colony, Rajendra Nagar, Upperpally, Hyderabad, Telangana 500048",
-      "confirmedOn": "https://dddental.in/contact-us/"
+      "confirmedOn": "Portfolio brand facts"
     },
     {
       "id": "toli-chowki",
       "name": "Toli Chowki",
       "address": "Gate no. 2, Street Number 2, opposite Aries Restaurant, Paramount Hills, Toli Chowki, Hyderabad, Telangana 500008",
-      "confirmedOn": "https://dddental.in/contact-us/"
+      "confirmedOn": "Portfolio brand facts"
     }
   ],
   "branchConflicts": [
-    "The live homepage says 5 branches and has also listed Malakpet, Abids, and Aramghar.",
-    "The contact page publishes the four branches in this file.",
-    "Do not add a fifth branch until the clinic confirms the list."
+    "Some copy says 5 branches and has also listed Malakpet, Abids, and Aramghar.",
+    "This file publishes four branches for the portfolio demo.",
+    "Do not add a fifth branch unless the portfolio branch list is updated here."
   ],
   "proof": {
-    "liveSite": {
+    "portfolio": {
       "years": "10+",
       "patients": "25k+",
       "branchesClaimed": "5",
-      "source": "https://dddental.in/"
+      "source": "Portfolio brand facts"
     },
     "currentHero": {
       "patients": "1000+",
-      "note": "Taken from the design board. Do not ship this if it contradicts the confirmed clinic figure."
+      "note": "Keep hero figures consistent with the portfolio stats used elsewhere in the UI."
     }
   },
   "services": [

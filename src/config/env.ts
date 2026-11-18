@@ -21,11 +21,9 @@ export const env = {
   mailFrom: () => optional("MAIL_FROM"),
   mailFromName: () => optional("MAIL_FROM_NAME") || "Deccan Dentics",
   adminNotifyEmail: () => optional("ADMIN_NOTIFY_EMAIL"),
-  // The address this deployment is reached at: SITE_URL when set, else Vercel's production
-  // address (the custom domain once it is added), else the live site. Used for share previews,
-  // canonical links and email links, so they never point at a host that lacks the page.
+  // Public URL for share previews, canonical links, and email links.
+  // Prefer SITE_URL; otherwise use the host-provided production URL when present.
   siteUrl: () =>
     optional("SITE_URL") ||
-    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "") ||
-    "https://dddental.in",
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : ""),
 };

@@ -6,7 +6,6 @@ export const BRAND = {
   name: CLINIC.name,
   tagline: "Healthy smiles. Happier lives.",
   description: "Family dental care in Hyderabad. Calm, precise, and patient-first, for checkups through complex treatment.",
-  url: CLINIC.website,
   phone: CLINIC.phone,
   phoneHref: CLINIC.phoneHref,
   email: CLINIC.email,

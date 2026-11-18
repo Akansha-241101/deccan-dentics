@@ -1,13 +1,13 @@
 # Product Requirements — Deccan Dentics
 
-Public redesign of [dddental.in](https://dddental.in/). The new site helps a person in Hyderabad choose a branch, understand a treatment, and ask for an appointment. It is a clinic website, not a patient portal.
+Resume / portfolio product under the **Deccan Dentics** brand. The site helps a visitor choose a branch, understand a treatment, and book an appointment. It is a clinic-style demo website, not a patient portal.
 
 Read `brand-manifest.json` before writing clinic copy. Read `DESIGN.md` before changing layout.
 
 ## 1. Goals
 
-- Replace the current WordPress site with a fast, calm, mobile-first Next.js site.
-- Keep the clinic's real services, branches, phone number, and email.
+- Ship a fast, calm, mobile-first Next.js clinic demo.
+- Use Deccan Dentics brand facts for services, branches, phone number, and email.
 - Make the next step obvious: call, or send an appointment request.
 - Look like the forest-green design system already in `src/app/globals.css`, including light and dark themes.
 - Stay accurate. Unconfirmed statistics, branches, prices, and doctor names do not ship.
@@ -30,8 +30,8 @@ Staff dashboards, patient logins, and online payments are out of scope.
 - One marketing site with Home, About, Services, Reviews, FAQ, and Contact.
 - Header with logo, those links, theme switch, and Book Appointment.
 - Hero already started: headline, two actions, feature row, portrait, trust badge.
-- Service list from the live site, summarized in plain language, each linking to a short detail.
-- Four branches confirmed on the [contact page](https://dddental.in/contact-us/).
+- Service list from `brand-manifest.json`, summarized in plain language, each linking to a short detail.
+- Four branches from portfolio brand facts (Kondapur, Manikonda, Rajendranagar, Toli Chowki).
 - Reviews section using only reviews the clinic approves. No invented quotes.
 - FAQ for visit frequency, emergencies, children, and payment.
 - Contact block: phone `079956 86661`, email `drsadiqali2000@gmail.com`, hours, and a request form.
@@ -61,22 +61,22 @@ Staff dashboards, patient logins, and online payments are out of scope.
 - The phone control uses `tel:+917995686661`. The email control uses the published address.
 - The appointment form collects name, phone, email, branch, service, preferred time, and a short note. It does not ask for medical history.
 - Submitting the form shows success or a clear error. Until a delivery service exists, the form must not pretend an email was sent.
-- Service names come from `brand-manifest.json`. Detail copy stays shorter than the old service pages and does not add claims the live page did not make.
+- Service names come from `brand-manifest.json`. Detail copy stays concise and does not invent clinical claims.
 - Reviews render as text, never as raw HTML.
 - Empty, loading, and error states exist wherever data is fetched. Static sections need an empty state only when their list can be empty.
 - Theme survives a reload. Preference may live in `localStorage`. Clinical details must not.
 
 ## 6. Content requirements
 
-Confirmed from the live site on 30 Oct 2026:
+Portfolio brand facts:
 
-- Tagline to use in the redesign: **Healthy smiles. Happier lives.**
-- Legacy homepage line, kept only as reference: "Don't Just Smile, Shine with Confidence!"
-- Proof on the live homepage: 10+ years, 25k+ happy patients, 5 branches, family dentistry.
-- The current hero badge says "1000+ Happy Smiles". That figure is from the design board. Do not launch with it until the clinic picks one number.
+- Tagline: **Healthy smiles. Happier lives.**
+- Legacy line (reference only): "Don't Just Smile, Shine with Confidence!"
+- Proof stats in copy: 10+ years, 25k+ happy patients, family dentistry.
+- Keep hero badge figures consistent with those stats.
 - Differentiators: experienced doctors, personalized plans, flexible payment, emergency care, modern equipment.
 - Visit path: schedule, examine, explain the plan and cost, treat, follow up.
-- Hours published on the contact page: Monday–Saturday 09:00–20:00, Sunday 14:00–18:00.
+- Hours: Monday–Saturday 09:00–20:00, Sunday 14:00–18:00.
 
 ## 7. Non-functional requirements
 

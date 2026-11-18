@@ -81,17 +81,7 @@ export function SiteFooter() {
 
       <div className="border-t border-border">
         <div className="mx-auto flex max-w-[var(--container-max)] flex-col gap-2 px-[var(--container-padding)] py-5 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © 2026 {CLINIC.name}. All rights reserved.
-          </p>
-          <a
-            href={CLINIC.website}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-primary"
-          >
-            dddental.in
-          </a>
+          <p>© 2026 {CLINIC.name}. Resume project demo.</p>
         </div>
       </div>
     </footer>

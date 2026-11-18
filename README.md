@@ -1,14 +1,14 @@
 # Deccan Dentics
 
-Portfolio rebuild of the Deccan Dentics dental clinic site ([dddental.in](https://dddental.in/)): a public marketing site plus an admin operations dashboard for patients, appointments, and clinic schedule.
+Resume / portfolio project under the **Deccan Dentics** brand: a public marketing site plus an admin operations dashboard for patients, appointments, and clinic schedule.
 
-Built as a resume project to show end-to-end product work — UI, booking flow, auth, and Neon-backed admin data.
+This is a demo product for showcasing full-stack work — not a live clinic website.
 
 ## What you can try
 
 **Public site**
 
-- Clinic marketing pages (home, about, services, reviews, FAQ, contact)
+- Marketing pages (home, about, services, reviews, FAQ, contact)
 - Appointment booking with live slot availability
 - Light / dark themes
 
@@ -24,7 +24,7 @@ Recruiters can open the admin without creating an account:
 
 | Field | Value |
 |---|---|
-| URL | [/admin/login](http://localhost:3000/admin/login) |
+| URL | `/admin/login` (or `http://localhost:3000/admin/login` locally) |
 | Email | `adeakansha24th@gmail.com` |
 | Password | `deccan-dentics@1234` |
 
@@ -92,10 +92,11 @@ src/constants/        Shared config and admin tokens
 | [docs/SECURITY.md](docs/SECURITY.md) | Data and secrets |
 | [docs/database.md](docs/database.md) | Database notes |
 
-## Clinic facts
+## Brand facts (portfolio)
 
-From the live site (verified 30 Oct 2026):
+Used in the UI for a realistic clinic demo:
 
+- Brand: Deccan Dentics · Hyderabad
 - Branches: Kondapur, Manikonda, Rajendranagar, Toli Chowki
 - Phone: `079956 86661` · Email: `drsadiqali2000@gmail.com`
 - Hours: Mon–Sat 09:00–20:00, Sun 14:00–18:00

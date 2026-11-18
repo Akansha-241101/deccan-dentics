@@ -14,7 +14,7 @@ The admin, booking flow, auth and email code follow the Eatrrite implementation.
    - `ADMIN_EMAILS`: who may sign up and open the admin, comma separated
    - `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM`, `MAIL_FROM_NAME`: the mail account (Gmail needs an app password)
    - `ADMIN_NOTIFY_EMAIL`: who gets the clinic's new-booking email (comma separated)
-   - `SITE_URL`: optional; the address used in email links (defaults to https://dddental.in)
+   - `SITE_URL`: optional; the public address used in email links (falls back to the deployment host URL when available)
 3. Run `bun run db:migrate` from the project root. It sends `db/migrations/001_initial.sql` to Neon as one transaction, so it either all runs or nothing is saved. It needs step 1 first, because `dd_profiles` points at `neon_auth."user"`.
 4. Start the app and open `/admin/signup`. Sign up with an admin email. The profile row is created on first sign-in.
 5. Optional, for trying the admin only (never on the live database): `bun run db:migrate db/migrations/002_dashboard_seed.sql` adds 20 sample patients and about 140 appointments from three weeks ago to ten days ahead, all inside the clinic hours, without overlaps, using the services in `dd_services`.
