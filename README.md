@@ -25,7 +25,7 @@ Recruiters can open the admin without creating an account:
 | Field | Value |
 |---|---|
 | URL | `/admin/login` (or `http://localhost:3000/admin/login` locally) |
-| Email | `adeakansha24th@gmail.com` |
+| Email | `deccandentics.demo@gmail.com` |
 | Password | `deccan-dentics@1234` |
 
 The login page also shows these credentials in a demo notice, with a **Continue with demo account** button.

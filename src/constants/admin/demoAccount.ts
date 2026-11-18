@@ -1,6 +1,6 @@
 /** Shared portfolio demo admin — safe to show in README and on /admin/login. */
 export const DEMO_ACCOUNT = {
-  email: "adeakansha24th@gmail.com",
+  email: "deccandentics.demo@gmail.com",
   password: "deccan-dentics@1234",
 } as const;
 
