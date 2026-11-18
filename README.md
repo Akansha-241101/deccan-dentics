@@ -1,119 +1,101 @@
 # Deccan Dentics
 
-Public redesign of the Deccan Dentics dental clinic in Hyderabad. The live site is [dddental.in](https://dddental.in/). This repository is the Next.js replacement: a calm, forest-green marketing site for services, branches, and appointment requests.
+Portfolio rebuild of the Deccan Dentics dental clinic site ([dddental.in](https://dddental.in/)): a public marketing site plus an admin operations dashboard for patients, appointments, and clinic schedule.
 
-It is not a patient portal. There are no accounts and no payments.
+Built as a resume project to show end-to-end product work — UI, booking flow, auth, and Neon-backed admin data.
 
-## Features
+## What you can try
 
-Shipped in the app today:
+**Public site**
 
-- Light and dark themes from one token set.
-- Header, theme switch, and hero.
-- Shared button, input, card, select, and accordion styles.
+- Clinic marketing pages (home, about, services, reviews, FAQ, contact)
+- Appointment booking with live slot availability
+- Light / dark themes
 
-Still to build:
+**Admin** (`/admin`)
 
-- About, services, reviews, FAQ, contact, and a mobile nav.
-- An appointment request that only reports success after the clinic actually receives it.
+- Patients, appointments, calendar, and schedule
+- Dashboard overview and settings
+- Neon Auth sign-in (allowlisted admin emails only)
 
-Product detail is in [docs/PRD.md](docs/PRD.md). Task status is in [docs/TASKS.md](docs/TASKS.md).
+## Demo admin login
 
-## Technology
+Recruiters can open the admin without creating an account:
 
-| Tool | Version in this repo |
+| Field | Value |
+|---|---|
+| URL | [/admin/login](http://localhost:3000/admin/login) |
+| Email | `adeakansha24th@gmail.com` |
+| Password | `deccan-dentics@1234` |
+
+The login page also shows these credentials in a demo notice, with a **Continue with demo account** button.
+
+This is a shared portfolio demo account — not a personal secret.
+
+## Tech stack
+
+| Tool | Version |
 |---|---|
 | Bun | 1.4.4 |
-| Next.js | 16.4.3 |
+| Next.js | 16.4.6 |
 | React | 19.3 |
 | Tailwind CSS | 4 |
-| shadcn/ui | `base-nova` on Base UI |
-| TypeScript | 5, strict |
-
-UI primitives live in `src/components/ui`. Icons are from `lucide-react`. Fonts are Libre Baskerville, Merriweather, and Caveat, loaded with `next/font`.
-
-## Prerequisites
-
-Install [Bun](https://bun.sh) 1.4 or newer. No global Next.js install is required.
+| Neon (Postgres + Auth) | `@neondatabase/serverless`, `@neon/auth` |
+| shadcn/ui | Base UI (`base-nova`) |
+| TypeScript | 5 (strict) |
 
 ## Setup
 
-From the project root:
-
 ```bash
 bun install
+cp .env.example .env.local   # fill Neon, auth, and mail values
+bun run db:migrate           # applies SQL in db/migrations/
 bun run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000). Admin: [http://localhost:3000/admin/login](http://localhost:3000/admin/login).
 
-The dev server uses Webpack (`next dev --webpack`).
-
-## Environment variables
-
-None. The site runs with the values in the repo.
-
-Do not create a `NEXT_PUBLIC_` variable for a secret. When appointment delivery is added, put provider keys in server-only variables and list the names, without values, in a future `.env.example`. See [docs/SECURITY.md](docs/SECURITY.md).
-
-The clinic phone `079956 86661` and email `drsadiqali2000@gmail.com` are public contact details from the live site. They are not credentials.
-
-## Database
-
-There is no database. Clinic facts are static and recorded in [`brand-manifest.json`](brand-manifest.json).
-
-A future `appointment_requests` table is sketched in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Do not add a database client until that choice is written into [docs/MEMORY.md](docs/MEMORY.md).
+Required env names are listed in [`.env.example`](.env.example). Never commit `.env.local`.
 
 ## Scripts
 
 | Command | Purpose |
 |---|---|
-| `bun install` | Install dependencies |
-| `bun run dev` | Start the dev server |
-| `bun run lint` | Run ESLint |
+| `bun run dev` | Dev server (Webpack) |
 | `bun run build` | Production build |
-| `bun run start` | Serve the production build |
+| `bun run start` | Serve production build |
+| `bun run lint` | ESLint |
+| `bun run db:migrate` | Run SQL migrations against Neon |
 
-Add a shadcn component with:
-
-```bash
-bunx --bun shadcn@latest add <component>
-```
-
-Then style it with the utilities in `src/app/globals.css` rather than a one-off palette. Guidance is in [docs/DESIGN.md](docs/DESIGN.md).
-
-## Project structure
+## Project layout
 
 ```text
-brand-manifest.json     Brand contract: voice, color, type, branches, services
-docs/                   PRD, architecture, design, memory, rules, tasks, security
-public/images/          Brand, hero, services, tools, and section artwork
-src/app/                Routes, root layout, global CSS
-src/components/         Header, hero, and feature components
-src/components/ui/      shadcn primitives
-src/constants/          Shared navigation, and later clinic lists
-src/lib/utils.ts        Re-exports the cn helper
+brand-manifest.json   Clinic brand facts (voice, branches, services)
+db/migrations/        Postgres schema + optional seed
+docs/                 PRD, architecture, design, memory, rules, tasks, security
+src/app/              Routes (public + /admin) and API handlers
+src/components/       UI by area (home, admin, layout, ui)
+src/features/         Appointment booking and auth flows
+src/constants/        Shared config and admin tokens
 ```
-
-Folders such as `src/hooks`, `src/services`, `src/utils`, and `src/types` are part of the architecture and should be created when the first real file needs them. See [docs/RULES.md](docs/RULES.md).
 
 ## Documentation
 
-| Document | What it decides |
+| Doc | Purpose |
 |---|---|
-| [docs/PRD.md](docs/PRD.md) | Who the site is for, and what is in or out |
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | How the app is put together |
-| [docs/DESIGN.md](docs/DESIGN.md) | Tokens, components, layout, motion |
-| [docs/MEMORY.md](docs/MEMORY.md) | Decisions, verified facts, and open conflicts |
-| [docs/RULES.md](docs/RULES.md) | Coding rules for people and agents |
-| [docs/TASKS.md](docs/TASKS.md) | What is done and what is next |
-| [docs/SECURITY.md](docs/SECURITY.md) | Data, secrets, and the future appointment route |
+| [docs/PRD.md](docs/PRD.md) | Product scope |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | How the app is structured |
+| [docs/DESIGN.md](docs/DESIGN.md) | Visual system and motion |
+| [docs/MEMORY.md](docs/MEMORY.md) | Decisions and verified facts |
+| [docs/RULES.md](docs/RULES.md) | Coding conventions |
+| [docs/TASKS.md](docs/TASKS.md) | Shipped vs next |
+| [docs/SECURITY.md](docs/SECURITY.md) | Data and secrets |
+| [docs/database.md](docs/database.md) | Database notes |
 
-## Clinic facts used here
+## Clinic facts
 
-Taken from the live site on 30 Oct 2026. The contact page is the source for branches.
+From the live site (verified 30 Oct 2026):
 
-- Kondapur, Manikonda, Rajendranagar, and Toli Chowki.
-- Phone `079956 86661`. Email `drsadiqali2000@gmail.com`.
-- Monday–Saturday 09:00–20:00, Sunday 14:00–18:00.
-
-The homepage also claims five branches and has named other areas. Those are not shown as confirmed locations until the clinic says so. Details and the open questions are in [docs/MEMORY.md](docs/MEMORY.md).
+- Branches: Kondapur, Manikonda, Rajendranagar, Toli Chowki
+- Phone: `079956 86661` · Email: `drsadiqali2000@gmail.com`
+- Hours: Mon–Sat 09:00–20:00, Sun 14:00–18:00

@@ -1,14 +1,14 @@
 "use client";
 
-import { Suspense, useActionState } from "react";
-import { CircleCheck } from "lucide-react";
-import { useSearchParams } from "next/navigation";
+import { Suspense, startTransition, useActionState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { BRAND } from "@/constants/brand";
+import { DEMO_ACCOUNT, DEMO_ACCOUNT_COPY } from "@/constants/admin/demoAccount";
+import { PasswordResetNotice } from "@/features/auth/components/PasswordResetNotice";
 import { signInAction, signUpAction } from "@/features/auth/services/authActions";
 import { ADMIN_ROUTES } from "@/features/auth/utils/routes";
 
@@ -19,7 +19,6 @@ const COPY = {
     lead: "Log in to manage patients, appointments and the schedule.",
     submit: "Log In",
     busy: "Logging in…",
-    // The admin account already exists, so the login page offers no way to create one.
     switchText: null,
     switchLink: null,
   },
@@ -38,6 +37,14 @@ const COPY = {
 export function AuthForm({ mode }: { mode: "login" | "signup" }) {
   const copy = COPY[mode];
   const [state, formAction, pending] = useActionState(mode === "login" ? signInAction : signUpAction, null);
+
+  function continueWithDemo() {
+    if (pending) return;
+    const form = new FormData();
+    form.set("email", DEMO_ACCOUNT.email);
+    form.set("password", DEMO_ACCOUNT.password);
+    startTransition(() => formAction(form));
+  }
 
   return (
     <form action={formAction} className="w-full max-w-md rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8">
@@ -91,6 +98,11 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
       <Button type="submit" size="lg" disabled={pending} className="mt-6 w-full">
         {pending ? copy.busy : copy.submit}
       </Button>
+      {mode === "login" ? (
+        <Button type="button" variant="outline" size="lg" disabled={pending} onClick={continueWithDemo} className="mt-3 w-full">
+          {pending ? "Signing in…" : DEMO_ACCOUNT_COPY.action}
+        </Button>
+      ) : null}
       {copy.switchLink ? (
         <p className="mt-4 text-center text-sm text-muted-foreground">
           {copy.switchText}{" "}
@@ -100,16 +112,5 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
         </p>
       ) : null}
     </form>
-  );
-}
-
-// After a password reset the login page opens with ?reset=done: say so above the form.
-function PasswordResetNotice() {
-  if (useSearchParams().get("reset") !== "done") return null;
-  return (
-    <p role="status" className="mt-4 flex items-center gap-2 rounded-lg bg-beige px-3 py-2 text-sm text-primary">
-      <CircleCheck aria-hidden className="size-4 shrink-0" />
-      Your password is updated. Log in with the new one.
-    </p>
   );
 }

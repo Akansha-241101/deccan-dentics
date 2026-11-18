@@ -6,7 +6,7 @@ export type Patient = {
   id: string;
   name: string;
   phone: string;
-  /** Website bookings do not ask for these. The admin can add them later. */
+  /** Collected on website booking; the admin can edit them later. */
   age?: number;
   gender?: PatientGender;
   profession?: string;

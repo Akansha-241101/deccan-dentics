@@ -9,11 +9,13 @@ import { validateBooking } from "@/features/appointment/utils/validateBooking";
 import { useBooking } from "@/features/appointment/hooks/useBooking";
 import { useShowToast } from "@/hooks/useShowToast";
 import type { BookingSlot } from "@/features/appointment/types/booking";
+import type { PatientGender } from "@/types/admin/patient";
 import { SlotDialog } from "./SlotDialog";
 import { SlotTrigger } from "./SlotTrigger";
 import { ConsentCheckbox } from "@/components/shared/ConsentCheckbox";
 
-const EMPTY = { service: "", name: "", email: "", phone: "" };
+const GENDERS: PatientGender[] = ["Female", "Male"];
+const EMPTY = { service: "", name: "", email: "", age: "", gender: "", phone: "" };
 
 // The website booking form. The details are checked here, then useBooking saves the booking.
 type BookingFormProps = {
@@ -71,6 +73,21 @@ export function BookingForm({ visitMinutes, hours, services }: BookingFormProps)
         <div className="min-w-0 space-y-2">
           <Label htmlFor="booking-email">Email address</Label>
           <Input id="booking-email" type="email" autoComplete="email" maxLength={120} placeholder="you@example.com" value={fields.email} onChange={(e) => update("email")(e.target.value)} />
+        </div>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div className="min-w-0 space-y-2">
+          <Label htmlFor="booking-age">Age</Label>
+          <Input id="booking-age" type="number" inputMode="numeric" min={1} max={120} placeholder="Years" value={fields.age} onChange={(e) => update("age")(e.target.value)} />
+        </div>
+        <div className="min-w-0 space-y-2">
+          <Label htmlFor="booking-gender">Gender</Label>
+          <Select items={GENDERS.map((g) => ({ label: g, value: g }))} value={fields.gender || null} onValueChange={(v) => update("gender")(String(v ?? ""))}>
+            <SelectTrigger id="booking-gender" className="w-full"><SelectValue placeholder="Select gender" /></SelectTrigger>
+            <SelectContent>
+              {GENDERS.map((g) => <SelectItem key={g} value={g}>{g}</SelectItem>)}
+            </SelectContent>
+          </Select>
         </div>
       </div>
       <div className="space-y-2">

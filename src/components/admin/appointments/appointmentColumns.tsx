@@ -1,10 +1,10 @@
 "use client";
 
 import { format, parseISO } from "date-fns";
+import { AppointmentStatusBadge } from "@/components/admin/appointments/AppointmentStatusBadge";
 import { DashboardAvatar } from "@/components/admin/dashboard/DashboardAvatar";
 import type { Appointment } from "@/types/admin/appointment";
 import type { DataTableColumn } from "@/types/admin/dataTable";
-import { APPOINTMENT_STATUS_LABELS } from "@/constants/admin/appointments/statuses";
 import { formatTimeLabel } from "@/utils/admin/time";
 
 export function getAppointmentListColumns(
@@ -44,7 +44,7 @@ export function getAppointmentListColumns(
       key: "status",
       header: "Status",
       width: 30,
-      cell: (item) => <span className="truncate text-ink">{APPOINTMENT_STATUS_LABELS[item.status]}</span>,
+      cell: (item) => <AppointmentStatusBadge status={item.status} />,
     },
   ];
 }

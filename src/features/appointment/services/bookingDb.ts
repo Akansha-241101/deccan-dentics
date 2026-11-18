@@ -34,17 +34,21 @@ async function hiddenSlots(): Promise<OccupiedSlot[]> {
   return rows as OccupiedSlot[];
 }
 
-// An existing patient with the same 10-digit phone, or a new one. Fills a missing email.
+// An existing patient with the same 10-digit phone, or a new one. Updates email/age/gender.
 async function patientFor(input: BookingInput): Promise<string> {
   const sql = db();
   const [known] = await sql`
     select id from dd_patients where right(regexp_replace(phone, '\\D', '', 'g'), 10) = ${input.phone} limit 1`;
   if (known) {
-    await sql`update dd_patients set email = coalesce(email, ${input.email}) where id = ${known.id}`;
+    await sql`
+      update dd_patients
+      set email = coalesce(email, ${input.email}), age = ${input.age}, gender = ${input.gender}
+      where id = ${known.id}`;
     return String(known.id);
   }
   const [created] = await sql`
-    insert into dd_patients (name, phone, email) values (${input.name}, ${formatPhone(input.phone)}, ${input.email})
+    insert into dd_patients (name, phone, email, age, gender)
+    values (${input.name}, ${formatPhone(input.phone)}, ${input.email}, ${input.age}, ${input.gender})
     returning id`;
   return String(created.id);
 }
