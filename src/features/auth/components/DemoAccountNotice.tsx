@@ -38,8 +38,8 @@ export function DemoAccountNotice() {
           </div>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{DEMO_ACCOUNT_COPY.body}</p>
           <dl className="mt-3 space-y-1 rounded-lg bg-beige px-3 py-2 text-sm text-primary">
-            <div className="flex flex-wrap gap-x-2"><dt className="font-medium">Email</dt><dd className="break-all">{DEMO_ACCOUNT.email}</dd></div>
-            <div className="flex flex-wrap gap-x-2"><dt className="font-medium">Password</dt><dd>{DEMO_ACCOUNT.password}</dd></div>
+            <div className="flex flex-wrap gap-x-2"><dt className="font-medium">Email :-</dt><dd className="break-all">{DEMO_ACCOUNT.email}</dd></div>
+            <div className="flex flex-wrap gap-x-2"><dt className="font-medium">Password :-</dt><dd>{DEMO_ACCOUNT.password}</dd></div>
           </dl>
           {error ? <p role="alert" className="mt-3 rounded-lg bg-alert-bg px-3 py-2 text-sm text-alert-text">{error}</p> : null}
           <Button type="button" size="lg" disabled={pending} onClick={continueWithDemo} className="mt-4 w-full">
