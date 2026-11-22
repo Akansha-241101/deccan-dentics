@@ -5,57 +5,86 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Base */
-  --background: #f7faf7;
-  --foreground: #1b3026;
+  /* Eatrrite brand palette */
+  --er-color-primary: #014e4e;
+  --er-color-primary-dark: #003636;
+  --er-color-accent: #e5b858;
+  --er-color-accent-green: #52c834;
+  /* Warm beige surfaces swapped for cool off-white / light gray */
+  --er-color-cream: #fafafa;
+  --er-color-beige-light: #fafafa;
+  --er-color-beige: #f6f6f6;
+  --er-color-beige-deep: #eeeeee;
+  --er-color-accent-deep: #9a6f1e;
+  --er-color-white: #ffffff;
+  --er-color-ink: #1c2029;
+  --er-color-text: #595b62;
+  --er-color-muted: #819291;
+  --er-color-footer: #111416;
+  --er-color-border: rgba(1, 78, 78, 0.12);
+  --er-color-border-hover: rgba(229, 184, 88, 0.45);
+  --er-radius: 24px;
+  --er-radius-sm: 16px;
+  --er-shadow: 0 18px 50px rgba(1, 78, 78, 0.06);
+  --er-container: 1200px;
+  --er-color-accent-hover: #f0c96a;
+  --er-color-pill: #eeeeee;
+  --er-color-chevron: #f0f0f0;
+  --er-color-soft: #eeeeee;
+  --er-color-footer-text: #c9d0ce;
+  --er-color-alert-bg: #fdecee;
+  --er-color-alert-text: #842029;
+  --er-color-whatsapp: #25d366;
+  --er-color-input-border: rgba(1, 78, 78, 0.08);
+  --er-color-cta-mid: #026363;
+  --er-color-slot-hover: #f0f0f0;
+  --er-color-slot-icon: #f6f6f6;
+  --er-color-slot-weekday: #8a8f8c;
+  --er-color-slot-muted: #c4c4c4;
+  --er-color-slot-today: #d9b56a;
+  --er-color-slot-line: #e8e8e8;
+  --er-color-slot-border: #e0e0e0;
+  --er-color-slot-time-hover: #fafafa;
+  --er-ease: cubic-bezier(0.25, 1, 0.5, 1);
 
-  /* Cards & Popovers */
-  --card: #ffffff;
-  --card-foreground: #1b3026;
-  --popover: #ffffff;
-  --popover-foreground: #1b3026;
-
-  /* Primary — Forest Green */
-  --primary: #287a52;
-  --primary-foreground: #ffffff;
-
-  /* Secondary — Soft Sage */
-  --secondary: #e5f0e7;
-  --secondary-foreground: #28583d;
-
-  /* Muted */
-  --muted: #edf3ed;
-  --muted-foreground: #687b6d;
-
-  /* Accent — Fresh Green */
+  /* shadcn semantic tokens (Eatrrite) */
+  --background: #f6f6f6;
+  --foreground: var(--er-color-text);
+  --card: var(--er-color-white);
+  --card-foreground: var(--er-color-text);
+  --popover: var(--er-color-white);
+  --popover-foreground: var(--er-color-ink);
+  --primary: var(--er-color-primary);
+  --primary-foreground: var(--er-color-white);
+  --secondary: #eeeeee;
+  --secondary-foreground: var(--er-color-primary);
+  --muted: #eeeeee;
+  --muted-foreground: var(--er-color-muted);
+  /* Accent stays Deccan Dentics (undisturbed) */
   --accent: #d9efdf;
   --accent-foreground: #205c3b;
-
-  /* Feedback */
-  --destructive: #dc4545;
-  --destructive-foreground: #ffffff;
-
-  /* Borders & Inputs */
-  --border: #dce7dd;
-  --input: #dce7dd;
-  --ring: #409566;
+  --destructive: var(--er-color-alert-text);
+  --destructive-foreground: var(--er-color-white);
+  --border: var(--er-color-border);
+  --input: var(--er-color-input-border);
+  --ring: var(--er-color-primary);
 
   /* Charts */
-  --chart-1: #287a52;
-  --chart-2: #6ba77e;
-  --chart-3: #a4c9a8;
-  --chart-4: #d2a66c;
-  --chart-5: #5b8d83;
+  --chart-1: var(--er-color-primary);
+  --chart-2: var(--er-color-accent);
+  --chart-3: var(--er-color-accent-green);
+  --chart-4: var(--er-color-muted);
+  --chart-5: var(--er-color-primary-dark);
 
   /* Sidebar */
-  --sidebar: #eff5ef;
-  --sidebar-foreground: #1b3026;
-  --sidebar-primary: #287a52;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #dcecdf;
-  --sidebar-accent-foreground: #28583d;
-  --sidebar-border: #dce7dd;
-  --sidebar-ring: #409566;
+  --sidebar: #f6f6f6;
+  --sidebar-foreground: var(--er-color-ink);
+  --sidebar-primary: var(--er-color-primary);
+  --sidebar-primary-foreground: var(--er-color-white);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--er-color-border);
+  --sidebar-ring: var(--er-color-primary);
 
   /* Shape */
   --radius: 0.875rem;
@@ -104,59 +133,40 @@
 }
 
 .dark {
-  /* Base */
-  --background: #101914;
-  --foreground: #e6f0e8;
-
-  /* Cards & Popovers */
-  --card: #18241c;
-  --card-foreground: #e6f0e8;
-  --popover: #1b2a20;
-  --popover-foreground: #e6f0e8;
-
-  /* Primary — Soft Emerald */
-  --primary: #65bd86;
-  --primary-foreground: #102719;
-
-  /* Secondary */
-  --secondary: #24382a;
-  --secondary-foreground: #c6e7ce;
-
-  /* Muted */
-  --muted: #202e24;
-  --muted-foreground: #a0b5a4;
-
-  /* Accent */
+  /* Dark companion for the Eatrrite teal / gold / beige system */
+  --background: var(--er-color-footer);
+  --foreground: var(--er-color-cream);
+  --card: #1a1e22;
+  --card-foreground: var(--er-color-cream);
+  --popover: #161a1d;
+  --popover-foreground: var(--er-color-cream);
+  --primary: #3d9a9a;
+  --primary-foreground: var(--er-color-footer);
+  --secondary: #2a3034;
+  --secondary-foreground: var(--er-color-beige-light);
+  --muted: #22272b;
+  --muted-foreground: var(--er-color-footer-text);
+  /* Accent stays Deccan Dentics (undisturbed) */
   --accent: #294533;
   --accent-foreground: #b9e7c5;
-
-  /* Feedback */
-  --destructive: #f87171;
-  --destructive-foreground: #250b0b;
-
-  /* Borders & Inputs */
-  --border: #2b3d30;
-  --input: #354a39;
-  --ring: #65bd86;
-
-  /* Charts */
-  --chart-1: #65bd86;
-  --chart-2: #8cc9a0;
-  --chart-3: #badbbd;
-  --chart-4: #e0b779;
-  --chart-5: #78b8a6;
-
-  /* Sidebar */
-  --sidebar: #141f18;
-  --sidebar-foreground: #e6f0e8;
-  --sidebar-primary: #65bd86;
-  --sidebar-primary-foreground: #102719;
-  --sidebar-accent: #24382a;
-  --sidebar-accent-foreground: #c6e7ce;
-  --sidebar-border: #2b3d30;
-  --sidebar-ring: #65bd86;
-
-  /* Shape */
+  --destructive: #ef5350;
+  --destructive-foreground: var(--er-color-white);
+  --border: rgba(201, 208, 206, 0.14);
+  --input: rgba(201, 208, 206, 0.18);
+  --ring: var(--er-color-accent);
+  --chart-1: #3d9a9a;
+  --chart-2: var(--er-color-accent);
+  --chart-3: var(--er-color-accent-green);
+  --chart-4: var(--er-color-footer-text);
+  --chart-5: var(--er-color-accent-deep);
+  --sidebar: #161a1d;
+  --sidebar-foreground: var(--er-color-cream);
+  --sidebar-primary: var(--er-color-accent);
+  --sidebar-primary-foreground: var(--er-color-ink);
+  --sidebar-accent: #2a3034;
+  --sidebar-accent-foreground: var(--er-color-beige-light);
+  --sidebar-border: rgba(201, 208, 206, 0.14);
+  --sidebar-ring: var(--er-color-accent);
   --radius: 0.875rem;
 }
 
@@ -564,40 +574,40 @@
   );
 }
 /*
- * Admin panel and booking tokens.
- * The admin and booking components (ported from the shared admin implementation) name a few
- * extra colours: ink, text, beige, alert, slot … Each one points at a Deccan Dentics token above,
- * so the admin keeps the forest-green identity in light and dark mode. Change colours in :root /
- * .dark above, not here.
+ * Admin / booking aliases — same names the UI already uses, pointed at Eatrrite tokens.
  */
 :root {
-  --dd-primary-dark: #1d5c3d;
-  --dd-ink: var(--foreground);
-  --dd-text: #3f5547;
-  --dd-beige-light: #fbfdfb;
-  --dd-beige: var(--secondary);
-  --dd-beige-deep: #d3e6d7;
-  --dd-accent-deep: #28583d;
-  --dd-accent-green: #3fa66b;
+  --dd-primary-dark: var(--er-color-primary-dark);
+  --dd-ink: var(--er-color-ink);
+  --dd-text: var(--er-color-text);
+  --dd-beige-light: #fafafa;
+  --dd-beige: var(--background);
+  --dd-beige-deep: #eeeeee;
+  --dd-accent-deep: #205c3b;
+  --dd-accent-green: var(--er-color-accent-green);
   --dd-pill: var(--muted);
-  --dd-alert-bg: #fdecec;
-  --dd-alert-text: #a12a2a;
-  --dd-slot-icon: var(--secondary);
-  --dd-slot-weekday: var(--muted-foreground);
-  --dd-slot-muted: #b9c8bc;
-  --dd-slot-line: var(--border);
+  --dd-alert-bg: var(--er-color-alert-bg);
+  --dd-alert-text: var(--er-color-alert-text);
+  --dd-slot-icon: var(--er-color-slot-icon);
+  --dd-slot-weekday: var(--er-color-slot-weekday);
+  --dd-slot-muted: var(--er-color-slot-muted);
+  --dd-slot-line: var(--er-color-slot-line);
 }
 
 .dark {
-  --dd-primary-dark: #2f7a52;
-  --dd-text: #c3d4c7;
-  --dd-beige-light: #16211a;
-  --dd-beige-deep: #2b4232;
-  --dd-accent-deep: #9fd8b1;
-  --dd-accent-green: #65bd86;
+  --dd-primary-dark: #026363;
+  --dd-text: var(--er-color-footer-text);
+  --dd-beige-light: #1a1e22;
+  --dd-beige: var(--background);
+  --dd-beige-deep: #2a3034;
+  --dd-accent-deep: #b9e7c5;
+  --dd-accent-green: var(--er-color-accent-green);
   --dd-alert-bg: #3a1717;
   --dd-alert-text: #fca5a5;
-  --dd-slot-muted: #4b5f50;
+  --dd-slot-muted: #6b7280;
+  --dd-slot-icon: #2a3034;
+  --dd-slot-weekday: var(--er-color-footer-text);
+  --dd-slot-line: rgba(201, 208, 206, 0.14);
 }
 
 @theme inline {

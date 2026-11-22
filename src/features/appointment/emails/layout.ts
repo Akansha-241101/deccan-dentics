@@ -5,15 +5,15 @@ import { LOGO_CID, LOGO_HEIGHT, LOGO_WIDTH } from "@/features/appointment/emails
 // stylesheets. Headings use Libre Baskerville and text Merriweather where the mail app loads
 // web fonts (Apple Mail, iOS); everywhere else Georgia keeps the same serif look.
 const C = {
-  primary: "#287a52",
-  primaryDark: "#1d5c3d",
+  primary: "#014e4e",
+  primaryDark: "#003636",
   accent: "#d9efdf",
-  cream: "#f7faf7",
-  beige: "#e5f0e7",
-  ink: "#1b3026",
-  text: "#3f5547",
-  muted: "#687b6d",
-  border: "#dce7dd",
+  cream: "#fafafa",
+  beige: "#f6f6f6",
+  ink: "#1c2029",
+  text: "#595b62",
+  muted: "#819291",
+  border: "rgba(1, 78, 78, 0.12)",
 };
 const HEADING = "'Libre Baskerville',Georgia,'Times New Roman',serif";
 const BODY = "Merriweather,Georgia,'Times New Roman',serif";

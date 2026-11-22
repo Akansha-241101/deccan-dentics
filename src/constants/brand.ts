@@ -12,7 +12,7 @@ export const BRAND = {
   emailHref: CLINIC.emailHref,
   logo: "/images/brand/logo.png",
   logoMark: "/images/brand/logo-mark.png",
-  /** Forest green primary and soft background from globals.css (light theme). */
-  themeColor: "#287a52",
-  backgroundColor: "#f7faf7",
+  /** Teal primary and warm paper background from the Eatrrite theme (light). */
+  themeColor: "#014e4e",
+  backgroundColor: "#f6f6f6",
 } as const;
