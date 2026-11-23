@@ -48,7 +48,7 @@
   --er-ease: cubic-bezier(0.25, 1, 0.5, 1);
 
   /* shadcn semantic tokens (Eatrrite) */
-  --background: #f6f6f6;
+  --background: #F1F6F1;
   --foreground: var(--er-color-text);
   --card: var(--er-color-white);
   --card-foreground: var(--er-color-text);
@@ -56,12 +56,12 @@
   --popover-foreground: var(--er-color-ink);
   --primary: var(--er-color-primary);
   --primary-foreground: var(--er-color-white);
-  --secondary: #eeeeee;
+  --secondary: #F1F6F1;
   --secondary-foreground: var(--er-color-primary);
-  --muted: #eeeeee;
+  --muted: #F1F6F1;
   --muted-foreground: var(--er-color-muted);
   /* Accent stays Deccan Dentics (undisturbed) */
-  --accent: #d9efdf;
+  --accent: #F1F6F1;
   --accent-foreground: #205c3b;
   --destructive: var(--er-color-alert-text);
   --destructive-foreground: var(--er-color-white);
